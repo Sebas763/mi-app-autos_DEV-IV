@@ -1,0 +1,194 @@
+/* =========================================================
+   HERO — primera <section> dentro del <main> de Home
+   Título abajo a la izquierda; texto y botones a la derecha
+   ========================================================= */
+main > main > section:first-child {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 100svh;
+  padding: calc(var(--nav-alto) + 3rem) 0 4rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Foto en blanco y negro con zoom lento */
+main > main > section:first-child::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("/images/sport.jpg") 60% center / cover no-repeat;
+  animation: hero-zoom 16s ease-out both;
+}
+
+main > main > section:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(0deg, var(--negro) 0%, rgba(5, 5, 5, 0.6) 40%, rgba(5, 5, 5, 0.15) 75%, rgba(5, 5, 5, 0.5) 100%);
+}
+
+/* Cuadrícula: izquierda título, derecha descripción + botones */
+main > main > section:first-child > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-areas:
+    "marca  ."
+    "titulo texto"
+    "titulo botones";
+  column-gap: clamp(2rem, 6vw, 5rem);
+  row-gap: 1.5rem;
+  align-items: end;
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* "Sebas Motors · Costa Rica" como etiqueta con borde */
+main > main > section:first-child > div > p:first-child {
+  grid-area: marca;
+  width: fit-content;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--blanco);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: aparecer 0.9s var(--suave) 0.2s both;
+}
+
+/* Título gigante */
+main > main > section:first-child h1 {
+  grid-area: titulo;
+  font-size: clamp(3.25rem, 7vw, 7rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+  animation: aparecer 1.1s var(--suave) 0.35s both;
+}
+
+/* Descripción con línea a la izquierda */
+main > main > section:first-child > div > p:nth-of-type(2) {
+  grid-area: texto;
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--texto-suave);
+  font-size: 1.05rem;
+  animation: aparecer 1s var(--suave) 0.6s both;
+}
+
+/* Botones uno debajo del otro, ancho completo */
+main > main > section:first-child > div > div {
+  grid-area: botones;
+  display: grid;
+  gap: 0.6rem;
+  animation: aparecer 1s var(--suave) 0.75s both;
+}
+
+main > main > section:first-child > div > div a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 0 1.4rem;
+  overflow: hidden;
+  border: 1px solid var(--blanco);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  isolation: isolate;
+  transition: color 0.5s var(--suave);
+}
+
+/* Flecha al final de cada botón */
+main > main > section:first-child > div > div a::after {
+  content: "↗";
+  font-size: 1.1rem;
+  transition: transform 0.5s var(--suave);
+}
+
+main > main > section:first-child > div > div a:hover::after {
+  transform: rotate(45deg);
+}
+
+/* Relleno que sube desde abajo al pasar el mouse */
+main > main > section:first-child > div > div a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--suave);
+}
+
+main > main > section:first-child > div > div a:hover::before {
+  transform: scaleY(1);
+}
+
+/* Primario: blanco → negro */
+main > main > section:first-child > div > div a:first-child {
+  background: var(--blanco);
+  color: var(--negro);
+}
+
+main > main > section:first-child > div > div a:first-child::before {
+  background: var(--negro);
+}
+
+main > main > section:first-child > div > div a:first-child:hover {
+  color: var(--blanco);
+}
+
+/* Secundario: transparente → blanco */
+main > main > section:first-child > div > div a:last-child {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--blanco);
+}
+
+main > main > section:first-child > div > div a:last-child::before {
+  background: var(--blanco);
+}
+
+main > main > section:first-child > div > div a:last-child:hover {
+  color: var(--negro);
+}
+
+main > main > section:first-child > div > div a:active {
+  transform: scale(0.98);
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.18);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Tablet y celular: todo en una columna */
+@media (max-width: 860px) {
+  main > main > section:first-child > div {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "marca"
+      "titulo"
+      "texto"
+      "botones";
+  }
+
+  main > main > section:first-child::before {
+    background-position: 35% 30%;
+  }
+}

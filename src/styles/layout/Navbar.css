@@ -1,0 +1,75 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--borde);
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: aparecer 0.8s var(--suave) both;
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: var(--nav-alto);
+}
+
+.navbar__brand {
+  text-decoration: none;
+}
+
+/* Enlaces dentro de una cápsula de vidrio */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.navbar__links a {
+  padding: 0.55rem 1.1rem;
+  border-radius: 9px;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar__links a:hover {
+  color: var(--blanco);
+}
+
+/* Página actual: fondo blanco, texto negro */
+.navbar__links a.active {
+  background: var(--blanco);
+  color: var(--negro);
+}
+
+@media (max-width: 600px) {
+  .navbar__inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .navbar__links {
+    width: 100%;
+  }
+
+  .navbar__links a {
+    flex: 1;
+    text-align: center;
+    padding-inline: 0.5rem;
+  }
+}

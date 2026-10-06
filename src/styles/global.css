@@ -1,0 +1,166 @@
+/* =========================================================
+   GLOBAL — solo blanco y negro
+   Variables, fuente, fondo, reset y contenedor.
+   ========================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&display=swap");
+
+:root {
+  /* Colores */
+  --negro: #050505;
+  --negro-2: #0e0e0e;
+  --gris-oscuro: #1c1c1c;
+  --gris: #8a8a8a;
+  --gris-claro: #d9d9d9;
+  --blanco: #ffffff;
+  --texto-suave: rgba(255, 255, 255, 0.62);
+  --borde: rgba(255, 255, 255, 0.12);
+  --borde-claro: rgba(0, 0, 0, 0.1);
+
+  /* Medidas */
+  --ancho-max: 1240px;
+  --gutter: clamp(1.25rem, 4vw, 2.75rem);
+  --nav-alto: 80px;
+
+  /* Movimiento */
+  --suave: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* En celular la navbar es más alta (logo arriba, enlaces abajo) */
+@media (max-width: 600px) {
+  :root {
+    --nav-alto: 116px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fondo: negro con un foco de luz arriba y columnas finas */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(70vw 40vw at 50% -10%, rgba(255, 255, 255, 0.08), transparent 70%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px) 0 0 / calc(100% / 6) 100%,
+    var(--negro);
+  background-attachment: fixed;
+  color: var(--blanco);
+  font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grano fino */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--blanco);
+  color: var(--negro);
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* Contenedor (lo usan Navbar, Footer y Experience) */
+.container {
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Texto pequeño encima de los títulos */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--gris);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+}
+
+/* Animaciones reutilizables */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes revelar {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

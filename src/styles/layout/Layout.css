@@ -1,0 +1,77 @@
+/* Las páginas que no son el inicio dejan espacio para la navbar fija */
+#root > main > :not(main) {
+  padding-top: calc(var(--nav-alto) + 2rem);
+}
+
+/* =========================================================
+   PÁGINA 404 (NotFound)
+   ========================================================= */
+section[aria-labelledby="not-found-title"] {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  gap: 1.25rem;
+  max-width: var(--ancho-max);
+  min-height: 90vh;
+  margin-inline: auto;
+  padding: calc(var(--nav-alto) + 2rem) var(--gutter) 4rem;
+}
+
+/* "404" gigante solo con contorno */
+section[aria-labelledby="not-found-title"] > span {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--blanco);
+  font-size: clamp(7rem, 26vw, 16rem);
+  font-weight: 800;
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+}
+
+section[aria-labelledby="not-found-title"] > p:first-of-type {
+  color: var(--gris);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+section[aria-labelledby="not-found-title"] h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+section[aria-labelledby="not-found-title"] > p:last-of-type {
+  max-width: 48ch;
+  color: var(--texto-suave);
+}
+
+section[aria-labelledby="not-found-title"] > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 1rem;
+  border: 1px solid var(--borde);
+}
+
+section[aria-labelledby="not-found-title"] > div a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 56px;
+  padding: 0 1.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+section[aria-labelledby="not-found-title"] > div a:last-child {
+  background: var(--blanco);
+  color: var(--negro);
+}
+
+section[aria-labelledby="not-found-title"] > div a:hover {
+  background: var(--gris-claro);
+  color: var(--negro);
+}

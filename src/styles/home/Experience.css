@@ -1,0 +1,126 @@
+/* =========================================================
+   EXPERIENCE — texto a la izquierda, foto a la derecha
+   ========================================================= */
+.experience {
+  margin-top: clamp(6rem, 12vw, 9rem);
+}
+
+.experience .container {
+  padding-inline: 0;
+}
+
+.experience__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: stretch;
+}
+
+/* La foto pasa a la derecha */
+.experience__image {
+  order: 2;
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.experience__image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/images/electrico.jpg") center / cover no-repeat;
+  transition: transform 1.2s var(--suave), filter 1s ease;
+}
+
+.experience__image:hover::before {
+  transform: scale(1.05);
+}
+
+/* Texto */
+.experience__content {
+  display: grid;
+  align-content: center;
+  gap: 1.4rem;
+}
+
+.experience__content h2 {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+}
+
+.experience__content > p:not(.eyebrow) {
+  max-width: 44ch;
+  color: var(--texto-suave);
+  font-size: 1.05rem;
+}
+
+/* Lista numerada 01, 02, 03 */
+.check-list {
+  margin: 0.5rem 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+  border-top: 1px solid var(--borde);
+}
+
+.check-list li {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--borde);
+  font-size: 1.05rem;
+  font-weight: 500;
+  counter-increment: paso;
+  transition: padding-left 0.5s var(--suave), color 0.3s ease;
+}
+
+.check-list li::before {
+  content: counter(paso, decimal-leading-zero);
+  color: var(--gris);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.check-list li:hover {
+  padding-left: 0.75rem;
+}
+
+/* "Consultar un modelo →" como botón blanco */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: 10px;
+  background: var(--blanco);
+  color: var(--negro);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.4s var(--suave), background-color 0.3s ease;
+}
+
+.text-link:hover {
+  background: var(--gris-claro);
+  transform: translateY(-3px);
+}
+
+@supports (animation-timeline: view()) {
+  .experience__grid {
+    animation: revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 50%;
+  }
+}
+
+@media (max-width: 860px) {
+  .experience__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience__image {
+    order: 0;
+    min-height: 300px;
+  }
+}

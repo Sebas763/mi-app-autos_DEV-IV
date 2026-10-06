@@ -1,0 +1,47 @@
+/* El logo es: <div> <span>S</span> <span>Sebas <small>Motors</small></span> </div> */
+.navbar__brand > div,
+.footer__about > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Círculo blanco con la letra */
+.navbar__brand > div > span:first-child,
+.footer__about > div > span:first-child {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blanco);
+  color: var(--negro);
+  font-size: 1.1rem;
+  font-weight: 800;
+  transition: transform 0.6s var(--suave);
+}
+
+.navbar__brand:hover > div > span:first-child {
+  transform: rotate(360deg);
+}
+
+/* Nombre en una sola línea: "Sebas MOTORS" */
+.navbar__brand > div > span:last-child,
+.footer__about > div > span:last-child {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  color: var(--blanco);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.navbar__brand small,
+.footer__about small {
+  color: var(--gris);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}

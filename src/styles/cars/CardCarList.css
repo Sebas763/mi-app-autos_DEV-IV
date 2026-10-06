@@ -1,0 +1,6 @@
+/* Cualquier <div> que contenga las tarjetas se vuelve una cuadrícula */
+main div:has(> article) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1.25rem;
+}

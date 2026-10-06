@@ -1,8 +1,19 @@
-import React from 'react'
+import type { Car } from "../types/Car";
+import CardCar from "./CardCar"
+import "../../../styles/cars/CardCarList.css"
 
-const CardCarList = () => {
+interface CardListProps {
+  cars: Car[];
+}
+
+const CardCarList = ({cars}: CardListProps) => {
   return (
-    <div>CardCarList</div>
+    <div>
+      {cars.map((car) => (
+        <CardCar key={car.id} car={car} />
+      ))}
+    </div>
+ 
   )
 }
 

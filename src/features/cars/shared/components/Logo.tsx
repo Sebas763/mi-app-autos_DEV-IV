@@ -1,8 +1,13 @@
-import React from 'react'
+import "../../../../styles/shared/Logo.css"
 
 const Logo = () => {
   return (
-    <div>Logo</div>
+    <div>
+      <span>S</span>
+      <span>
+        Sebas <small>Motors</small>
+      </span>
+    </div>
   )
 }
 

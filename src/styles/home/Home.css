@@ -1,0 +1,95 @@
+/* =========================================================
+   SECCIÓN "Selección destacada" (segunda <section> de Home)
+   Título centrado, tarjetas y el botón "Ver todos" ABAJO
+   ========================================================= */
+main > main > section:nth-of-type(2) {
+  display: grid;
+  justify-items: center;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: clamp(5rem, 10vw, 8rem) var(--gutter);
+  text-align: center;
+}
+
+/* "Selección destacada" */
+main > main > section:nth-of-type(2) > p {
+  grid-row: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--gris);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+main > main > section:nth-of-type(2) > p::before,
+main > main > section:nth-of-type(2) > p::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* "Conozca la colección" */
+main > main > section:nth-of-type(2) > h2 {
+  grid-row: 2;
+  font-size: clamp(2.5rem, 6.5vw, 5rem);
+}
+
+/* Lista de autos */
+main > main > section:nth-of-type(2) > div {
+  grid-row: 3;
+  width: 100%;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  text-align: left;
+}
+
+/* "Ver todos los autos" se mueve DEBAJO de las tarjetas como botón ancho */
+main > main > section:nth-of-type(2) > a {
+  grid-row: 4;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 64px;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  isolation: isolate;
+  transition: color 0.5s var(--suave), border-color 0.4s ease;
+}
+
+main > main > section:nth-of-type(2) > a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--blanco);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--suave);
+}
+
+main > main > section:nth-of-type(2) > a:hover {
+  border-color: var(--blanco);
+  color: var(--negro);
+}
+
+main > main > section:nth-of-type(2) > a:hover::before {
+  transform: scaleX(1);
+}
+
+/* Experience al final */
+main > main > section:nth-of-type(2) > section {
+  grid-row: 5;
+  width: 100%;
+  text-align: left;
+}

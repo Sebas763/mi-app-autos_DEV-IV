@@ -1,0 +1,167 @@
+/* =========================================================
+   TARJETA DE AUTO — blanca sobre fondo negro
+   <article>
+     <div> img, span(tipo), span(♡) </div>
+     <div> p(ubicación), h3, div(datos), div(precio + enlace) </div>
+   </article>
+   ========================================================= */
+main article {
+  display: flex;
+  flex-direction: column;
+  padding: 0.55rem;
+  border-radius: 20px;
+  background: var(--blanco);
+  color: var(--negro);
+  transition: transform 0.6s var(--suave), box-shadow 0.6s var(--suave);
+}
+
+main article:hover {
+  transform: translateY(-10px) rotate(-0.4deg);
+  box-shadow: 0 40px 70px -30px rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- Imagen: blanco y negro → color al pasar el mouse ---------- */
+main article > div:first-child {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--negro);
+}
+
+main article > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--suave), filter 0.8s ease;
+}
+
+main article:hover > div:first-child img {
+  transform: scale(1.06);
+}
+
+/* Tipo (SUV, Sedán...) */
+main article > div:first-child > span:first-of-type {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  background: var(--negro);
+  color: var(--blanco);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Corazón */
+main article > div:first-child > span:last-of-type {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--blanco);
+  color: var(--negro);
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: transform 0.5s var(--suave), background-color 0.3s ease, color 0.3s ease;
+}
+
+main article:hover > div:first-child > span:last-of-type {
+  background: var(--negro);
+  color: var(--blanco);
+  transform: scale(1.1);
+}
+
+/* ---------- Texto ---------- */
+main article > div:last-child {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  flex: 1;
+  padding: 1.1rem 0.75rem 0.6rem;
+}
+
+/* Nombre arriba, ubicación debajo */
+main article h3 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  font-size: 1.6rem;
+}
+
+main article > div:last-child > p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  color: #6b6b6b;
+  font-size: 0.875rem;
+}
+
+/* Datos separados por líneas */
+main article > div:last-child > div:first-of-type {
+  grid-column: 1 / -1;
+  display: flex;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--borde-claro);
+  border-bottom: 1px solid var(--borde-claro);
+}
+
+main article > div:last-child > div:first-of-type span {
+  flex: 1;
+  padding: 0.7rem 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+main article > div:last-child > div:first-of-type span + span {
+  border-left: 1px solid var(--borde-claro);
+}
+
+/* Precio y botón */
+main article > div:last-child > div:last-of-type {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+main article strong {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* "Ver detalle" como botón negro */
+main article > div:last-child > div:last-of-type a {
+  padding: 0.7rem 1.1rem;
+  border-radius: 10px;
+  background: var(--negro);
+  color: var(--blanco);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, transform 0.4s var(--suave);
+}
+
+main article > div:last-child > div:last-of-type a:hover {
+  background: #333;
+  transform: translateX(4px);
+}
+
+/* Las tarjetas aparecen al hacer scroll (Chrome/Edge) */
+@supports (animation-timeline: view()) {
+  main article {
+    animation: revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
