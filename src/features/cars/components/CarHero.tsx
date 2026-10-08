@@ -1,8 +1,13 @@
-import React from 'react'
+import type { Car } from "../types/Car";
 
-const CarHero = () => {
+interface CarHeroProps {
+  car: Car;
+}
+const CarHero = ({ car }: CarHeroProps) => {
   return (
-    <div>CarHero</div>
+    <div className="car-hero">
+      <img src={car.image} alt={`Ilustración de ${car.name}`} />
+    </div>
   )
 }
 

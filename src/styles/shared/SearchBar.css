@@ -1,0 +1,67 @@
+/* =========================================================
+   BUSCADOR — el elemento que contiene el input "Buscar..."
+   ========================================================= */
+:has(> input[placeholder*="uscar"]) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 560px;
+  min-height: 58px;
+  padding: 0 1.25rem;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.4s var(--suave);
+  animation: aparecer 0.9s var(--suave) 0.2s both;
+}
+
+/* Al escribir, el borde se ilumina */
+:has(> input[placeholder*="uscar"]):focus-within {
+  border-color: var(--blanco);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+/* Ícono de lupa (svg, img o span) */
+:has(> input[placeholder*="uscar"]) > :is(svg, img, span, i) {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--gris);
+  transition: color 0.3s ease;
+}
+
+:has(> input[placeholder*="uscar"]):focus-within > :is(svg, img, span, i) {
+  color: var(--blanco);
+}
+
+/* El input en sí: sin borde, transparente */
+input[placeholder*="uscar"] {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--blanco);
+  font: inherit;
+  font-size: 1rem;
+}
+
+input[placeholder*="uscar"]::placeholder {
+  color: var(--gris);
+}
+
+/* Etiqueta oculta para lectores de pantalla, si existe */
+:has(> input[placeholder*="uscar"]) > label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

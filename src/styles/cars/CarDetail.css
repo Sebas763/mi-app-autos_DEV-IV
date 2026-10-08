@@ -1,0 +1,355 @@
+/* =========================================================
+   DETALLE DEL AUTO
+   Es el <article> que tiene un <h1> (las tarjetas usan <h3>).
+   Orden de hijos: 1) imagen  2) información  3) tarjeta de precio
+   Se usa #root para ganarle a los estilos de las tarjetas.
+   ========================================================= */
+#root article:has(h1) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 2.5rem clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: 1.5rem var(--gutter) clamp(4rem, 8vw, 6rem);
+  border-radius: 0;
+  background: transparent;
+  color: var(--blanco);
+  box-shadow: none;
+  animation: none;
+}
+
+/* Quitar el efecto de tarjeta al pasar el mouse */
+#root article:has(h1):hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Si algún bloque trae la clase .container, que no agregue márgenes extra */
+#root article:has(h1) .container {
+  max-width: none;
+  padding-inline: 0;
+}
+
+/* =========================================================
+   1) IMAGEN GRANDE
+   ========================================================= */
+#root article:has(h1) > :first-child {
+  grid-column: 1 / -1;
+  position: relative;
+  height: clamp(280px, 58vh, 600px);
+  overflow: hidden;
+  border-radius: 28px;
+  background: var(--negro-2);
+  animation: aparecer 0.9s var(--suave) both;
+}
+
+#root article:has(h1) > :first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  transform: none;
+  transition: transform 1.4s var(--suave);
+}
+
+#root article:has(h1):hover > :first-child img {
+  filter: none;
+  transform: scale(1.02);
+}
+
+/* Sombra abajo de la foto */
+#root article:has(h1) > :first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(5, 5, 5, 0.55), transparent 40%);
+  pointer-events: none;
+}
+
+/* =========================================================
+   2) INFORMACIÓN
+   ========================================================= */
+#root article:has(h1) > :nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  padding: 0;
+  animation: aparecer 0.9s var(--suave) 0.15s both;
+}
+
+/* "← Volver a autos" */
+#root article:has(h1) > :nth-child(2) > a:first-child,
+#root article:has(h1) a[href="/cars"] {
+  width: fit-content;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.4s var(--suave);
+}
+
+#root article:has(h1) > :nth-child(2) > a:first-child:hover,
+#root article:has(h1) a[href="/cars"]:hover {
+  border-color: var(--blanco);
+  color: var(--blanco);
+  transform: translateX(-4px);
+}
+
+/* Ubicación */
+#root article:has(h1) h1 + *,
+#root article:has(h1) :has(+ h1) {
+  color: var(--gris);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Nombre del auto */
+#root article:has(h1) h1 {
+  margin: 0.75rem 0 2rem;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+/* Si la ubicación viene DESPUÉS del h1, deja espacio */
+#root article:has(h1) h1 + p {
+  margin: -1.25rem 0 2rem;
+}
+
+/* ---------- Datos: año / km / pasajeros ---------- */
+#root article:has(h1) :is(div, dl, ul):has(> * > strong):not(:last-child):not(article > :last-child),
+#root article:has(h1) > :nth-child(2) :is(div, dl, ul):has(> * > strong) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 0 2.5rem;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--borde);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+#root article:has(h1) > :nth-child(2) :is(div, dl, ul):has(> * > strong) > * {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 1.25rem 1.4rem;
+  color: var(--gris);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#root article:has(h1) > :nth-child(2) :is(div, dl, ul):has(> * > strong) > * + * {
+  border-left: 1px solid var(--borde);
+}
+
+#root article:has(h1) > :nth-child(2) :is(div, dl, ul):has(> * > strong) strong {
+  color: var(--blanco);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* ---------- Descripción y Características ---------- */
+#root article:has(h1) h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+  color: var(--gris);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+#root article:has(h1) h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--borde);
+}
+
+/* Texto de la descripción */
+#root article:has(h1) > :nth-child(2) h2 + p,
+#root article:has(h1) > :nth-child(2) :not(h2) + p:not(:first-child) {
+  max-width: 60ch;
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* Lista de características en dos columnas */
+#root article:has(h1) > :nth-child(2) ul:not(:has(strong)) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#root article:has(h1) > :nth-child(2) ul:not(:has(strong)) li {
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 500;
+  transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.4s var(--suave);
+}
+
+#root article:has(h1) > :nth-child(2) ul:not(:has(strong)) li:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-3px);
+}
+
+/* =========================================================
+   3) TARJETA DE PRECIO (a la derecha, se queda fija al bajar)
+   ========================================================= */
+#root article:has(h1) > :last-child:not(:nth-child(2)) {
+  position: sticky;
+  top: calc(var(--nav-alto) + 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 2rem;
+  border-radius: 24px;
+  background: var(--blanco);
+  color: var(--negro);
+  animation: aparecer 0.9s var(--suave) 0.3s both;
+}
+
+/* "Precio de venta" */
+#root article:has(h1) > :last-child:not(:nth-child(2)) > p:first-child {
+  color: #6b6b6b;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Precio */
+#root article:has(h1) > :last-child:not(:nth-child(2)) strong {
+  color: var(--negro);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Nota pequeña */
+#root article:has(h1) > :last-child:not(:nth-child(2)) > p:not(:first-child) {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: #6b6b6b;
+  font-size: 0.875rem;
+}
+
+/* "Solicitar información" como botón negro */
+#root article:has(h1) > :last-child:not(:nth-child(2)) a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  margin-top: 0.75rem;
+  padding: 0 1.4rem;
+  overflow: hidden;
+  border: 1px solid var(--negro);
+  border-radius: 12px;
+  background: var(--negro);
+  color: var(--blanco);
+  font-weight: 600;
+  text-decoration: none;
+  isolation: isolate;
+  transition: color 0.5s var(--suave);
+}
+
+#root article:has(h1) > :last-child:not(:nth-child(2)) a::after {
+  content: "↗";
+  transition: transform 0.5s var(--suave);
+}
+
+#root article:has(h1) > :last-child:not(:nth-child(2)) a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--blanco);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--suave);
+}
+
+#root article:has(h1) > :last-child:not(:nth-child(2)) a:hover {
+  color: var(--negro);
+}
+
+#root article:has(h1) > :last-child:not(:nth-child(2)) a:hover::before {
+  transform: scaleY(1);
+}
+
+#root article:has(h1) > :last-child:not(:nth-child(2)) a:hover::after {
+  transform: rotate(45deg);
+}
+
+/* =========================================================
+   Mensajes de "Cargando..." y error
+   ========================================================= */
+.status-message {
+  max-width: var(--ancho-max);
+  margin: 3rem auto;
+  padding: 2.5rem var(--gutter);
+  border: 1px dashed var(--borde);
+  border-radius: 18px;
+  color: var(--texto-suave);
+  text-align: center;
+}
+
+.status-message--error {
+  border-color: rgba(255, 122, 122, 0.5);
+  color: #ff9a9a;
+}
+
+/* =========================================================
+   CELULAR / TABLET: una columna
+   ========================================================= */
+@media (max-width: 900px) {
+  #root article:has(h1) {
+    grid-template-columns: 1fr;
+  }
+
+  #root article:has(h1) > :last-child:not(:nth-child(2)) {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  #root article:has(h1) > :nth-child(2) ul:not(:has(strong)) {
+    grid-template-columns: 1fr;
+  }
+
+  #root article:has(h1) > :nth-child(2) :is(div, dl, ul):has(> * > strong) > * {
+    padding: 1rem 0.9rem;
+  }
+}

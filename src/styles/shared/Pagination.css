@@ -1,0 +1,78 @@
+/* =========================================================
+   PAGINACIÓN — el elemento con los botones Anterior / Siguiente
+   (cualquier contenedor con botones que no sea un formulario)
+   ========================================================= */
+#root > main :not(form):not(form *):has(> button + :is(span, p) + button),
+#root > main :not(form):not(form *):has(> button):has(> :is(span, p)):not(:has(input)) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* "Página 1 de 2" */
+#root > main :not(form):not(form *):has(> button) > :is(span, p) {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* Botones */
+#root > main :not(form):not(form *):has(> :is(span, p)) > button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 46px;
+  padding: 0 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--blanco);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  isolation: isolate;
+  transition: color 0.4s var(--suave), border-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Relleno blanco que sube al pasar el mouse */
+#root > main :not(form):not(form *):has(> :is(span, p)) > button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--blanco);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s var(--suave);
+}
+
+#root > main :not(form):not(form *):has(> :is(span, p)) > button:hover:not(:disabled) {
+  border-color: var(--blanco);
+  color: var(--negro);
+}
+
+#root > main :not(form):not(form *):has(> :is(span, p)) > button:hover:not(:disabled)::before {
+  transform: scaleY(1);
+}
+
+#root > main :not(form):not(form *):has(> :is(span, p)) > button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Desactivado (primera / última página) */
+#root > main :not(form):not(form *):has(> :is(span, p)) > button:disabled {
+  border-color: var(--borde);
+  color: var(--gris);
+  opacity: 0.5;
+  cursor: not-allowed;
+}

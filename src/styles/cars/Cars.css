@@ -1,0 +1,36 @@
+/* =========================================================
+   PÁGINA "TODOS LOS AUTOS"
+   Es la página que tiene tarjetas (<article>) y no es el inicio.
+   ========================================================= */
+#root > main > :not(main):has(article) {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+}
+
+/* Título grande */
+#root > main > :not(main):has(article) h1 {
+  font-size: clamp(2.5rem, 6.5vw, 5rem);
+  animation: aparecer 0.9s var(--suave) both;
+}
+
+/* Subtítulo debajo del título */
+#root > main > :not(main):has(article) h1 + p {
+  margin-top: 0.75rem;
+  color: var(--texto-suave);
+  font-size: 1.1rem;
+  animation: aparecer 0.9s var(--suave) 0.1s both;
+}
+
+/* Mensaje cuando la búsqueda no encuentra nada */
+#root > main > :not(main):has(article) > p:last-child {
+  padding: 3rem;
+  border: 1px dashed var(--borde);
+  border-radius: 16px;
+  color: var(--texto-suave);
+  text-align: center;
+}

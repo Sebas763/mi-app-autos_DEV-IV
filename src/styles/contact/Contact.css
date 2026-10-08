@@ -1,0 +1,88 @@
+/* =========================================================
+   PÁGINA DE CONTACTO — la página que tiene un <form>
+   ========================================================= */
+#root > main > :not(main):has(form) {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding: clamp(2rem, 5vw, 3.5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+}
+
+/* Si la página tiene dos bloques (info + formulario), van lado a lado */
+@media (min-width: 900px) {
+  #root > main > :not(main):has(form):has(> :nth-child(2):last-child) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+
+  /* La info se queda fija mientras baja el formulario */
+  #root > main > :not(main):has(form):has(> :nth-child(2):last-child) > :first-child {
+    position: sticky;
+    top: calc(var(--nav-alto) + 2rem);
+  }
+}
+
+/* Título principal */
+#root > main > :not(main):has(form) h1 {
+  margin-top: 1rem;
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  animation: aparecer 0.9s var(--suave) both;
+}
+
+/* Texto debajo del título */
+#root > main > :not(main):has(form) h1 + p {
+  max-width: 46ch;
+  margin-top: 1.25rem;
+  color: var(--texto-suave);
+  font-size: 1.05rem;
+  animation: aparecer 0.9s var(--suave) 0.1s both;
+}
+
+/* ---------- Datos de contacto (Atención, Ubicación...) ---------- */
+#root > main > :not(main):has(form) :is(dl, ul):not(form *) {
+  display: grid;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--borde);
+}
+
+/* Etiquetas pequeñas: "ATENCIÓN", "UBICACIÓN" */
+#root > main > :not(main):has(form) :is(dt, strong, h3, h4):not(form *):not(h1):not(h2) {
+  display: block;
+  margin-top: 1.25rem;
+  color: var(--gris);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Valor de cada dato */
+#root > main > :not(main):has(form) :is(dd, li):not(form *) {
+  margin: 0;
+  padding: 0.35rem 0 1.25rem;
+  border-bottom: 1px solid var(--borde);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Si los datos no están en una lista, igual se separan con línea */
+#root > main > :not(main):has(form) :is(strong, h3, h4):not(form *) + p {
+  padding: 0.35rem 0 1.25rem;
+  border-bottom: 1px solid var(--borde);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* "Contacto" encima del formulario */
+#root > main > :not(main):has(form) h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+#root > main > :not(main):has(form) h2 + p {
+  margin: 0.75rem 0 1.5rem;
+  color: var(--texto-suave);
+}

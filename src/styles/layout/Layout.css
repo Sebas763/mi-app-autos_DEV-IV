@@ -1,11 +1,7 @@
-/* Las páginas que no son el inicio dejan espacio para la navbar fija */
-#root > main > :not(main) {
-  padding-top: calc(var(--nav-alto) + 2rem);
+#root > main {
+  padding-top: var(--nav-alto);
 }
 
-/* =========================================================
-   PÁGINA 404 (NotFound)
-   ========================================================= */
 section[aria-labelledby="not-found-title"] {
   display: grid;
   justify-items: start;
@@ -14,10 +10,9 @@ section[aria-labelledby="not-found-title"] {
   max-width: var(--ancho-max);
   min-height: 90vh;
   margin-inline: auto;
-  padding: calc(var(--nav-alto) + 2rem) var(--gutter) 4rem;
+  padding: 2rem var(--gutter) 4rem;
 }
 
-/* "404" gigante solo con contorno */
 section[aria-labelledby="not-found-title"] > span {
   color: transparent;
   -webkit-text-stroke: 1.5px var(--blanco);

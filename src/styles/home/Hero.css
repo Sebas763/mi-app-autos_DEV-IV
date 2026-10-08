@@ -6,8 +6,8 @@ main > main > section:first-child {
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: 100svh;
-  padding: calc(var(--nav-alto) + 3rem) 0 4rem;
+  min-height: calc(100svh - var(--nav-alto));
+  padding: 3rem 0 4rem;
   overflow: hidden;
   isolation: isolate;
 }
