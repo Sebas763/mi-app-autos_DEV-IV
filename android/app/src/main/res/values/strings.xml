@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sebas Motors</string>
+    <string name="title_activity_main">Sebas Motors</string>
+    <string name="package_name">com.sebas.motors</string>
+    <string name="custom_url_scheme">com.sebas.motors</string>
+</resources>
